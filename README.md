@@ -1,5 +1,7 @@
 # Extender Module
 
+[![Latest Stable Version](https://poser.pugx.org/wpfulcrum/extender/v/stable)](https://packagist.org/packages/wpfulcrum/extender) [![License](https://poser.pugx.org/wpfulcrum/extender/license)](https://packagist.org/packages/wpfulcrum/extender)
+
 The Fulcrum Extender module - extending the PHP functionality for arrays and strings.
 
 1. Array Module - making it easier to work with PHP arrays, especially deeply nested array.  It includes "dot" notation.

@@ -2,3 +2,5 @@ vendor
 reports
 node_modules
 tests/config/env/
+
+composer.lock
