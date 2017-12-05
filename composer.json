@@ -43,6 +43,8 @@
     "config": {
         "sort-order": true
     },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "scripts": {
         "phpcs": "\"vendor/bin/phpcs\"",
         "test-unit": "\"vendor/bin/phpunit\" --testsuite unit",
