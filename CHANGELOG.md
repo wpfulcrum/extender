@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+3.1.4
+- Added additional WP helpers.
+
 3.1.3
 - Added WP Module tests.
 

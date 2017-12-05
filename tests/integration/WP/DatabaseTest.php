@@ -4,7 +4,7 @@ namespace Fulcrum\Extender\Tests\Integration;
 
 use Fulcrum\Extender\WP\Database;
 
-class DatabaseTest extends TestCase
+class DatabaseTest extends IntegrationTestCase
 {
     public function testShouldGive404WithoutHardFlush()
     {

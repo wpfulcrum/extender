@@ -22,15 +22,16 @@
         "files": [
             "src/Arr/api.php",
             "src/Str/api.php",
-            "src/WP/api.php"
+            "src/WP/api.php",
+            "src/WP/helpers.php"
         ],
         "exclude-from-classmap": [
-            "/Tests/"
+            "/tests/"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Fulcrum\\Tests\\Extender\\": "tests/"
+            "Fulcrum\\Extender\\Tests\\": "tests/"
         }
     },
     "require": {
