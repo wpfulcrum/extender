@@ -19,13 +19,12 @@
  * @since       3.0.0
  * @author      hellofromTonya
  * @link        https://github.com/wpfulcrum/extender
- * @license     GNU-2.0+
+ * @license     MIT
  */
 
 /**
  * This class has been heavily adapted from the Laravel Illuminate framework,
  * which is copyrighted to Taylor Otwell and carries a MIT Licence (MIT).
- * Changes reflect compliance with PHP 5.3 as well as additional functionality.
  */
 
 namespace Fulcrum\Extender\Arr;

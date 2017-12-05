@@ -3,10 +3,10 @@
  * Array Helpers API
  *
  * @package     Fulcrum\Extender\Arr;
- * @since       3.0.0
+ * @since       3.1.2
  * @author      hellofromTonya
  * @link        https://github.com/wpfulcrum/extender
- * @license     GNU-2.0+
+ * @license     MIT
  */
 
 use Fulcrum\Extender\Arr\DotArray;

@@ -4,7 +4,6 @@ namespace Fulcrum\Extender\Str;
 
 class StrConverters
 {
-
     /**
      * The cache of snake-cased words.
      *

@@ -7,7 +7,7 @@
  * @since       3.1.0
  * @author      hellofromTonya
  * @link        https://github.com/wpfulcrum/extender
- * @license     GPL-2.0+
+ * @license    MIT
  */
 
 use Fulcrum\Extender\WP\Conditionals;

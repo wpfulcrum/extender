@@ -1,14 +1,4 @@
 <?php
-/**
- * Static Collection of State & Conditional Checkers to help
- * you more quickly build your conditional expressions.
- *
- * @package     Fulcrum\Extender\WP
- * @since       3.1.0
- * @author      hellofromTonya
- * @link        https://github.com/wpfulcrum/extender
- * @license     GPL-2.0+
- */
 
 namespace Fulcrum\Extender\WP;
 

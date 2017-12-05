@@ -7,7 +7,7 @@
  * @since       3.0.0
  * @author      hellofromTonya
  * @link        https://github.com/wpfulcrum/extender
- * @license     GNU-2.0+
+ * @license     MIT
  */
 
 use Fulcrum\Extender\Str\StrCheckers;
