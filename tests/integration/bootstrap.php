@@ -13,7 +13,12 @@ $wpDevTestsDir = getenv('WP_TESTS_DIR');
 
 // Travis CI & Vagrant SSH tests directory.
 if (empty($wpDevTestsDir)) {
-    $wpDevTestsDir = '/tmp/wordpress-tests';
+    $wpDevTestsDir = rtrim(sys_get_temp_dir(), '/\\') . '/wordpress-tests-lib';
+}
+
+if (!file_exists($wpDevTestsDir . '/includes/functions.php')) {
+    echo "Could not find $wpDevTestsDir/includes/functions.php, have you run bin/install-wp-tests.sh ?";
+    exit(1);
 }
 
 // Relative path to Core tests directory.
