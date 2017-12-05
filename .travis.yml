@@ -26,12 +26,12 @@ before_install:
 install:
   - composer install --prefer-source --no-interaction --dev
   - source bin/install-phpunit.sh
-#  - source bin/install-wp-tests.sh wordpress_test root '' 127.0.0.1 $WP_VERSION
+  - source bin/install-wp-tests.sh wordpress_test root '' 127.0.0.1 $WP_VERSION
 
 script:
   - composer phpcs
   - composer test-unit
-#  - composer test-integration
+  - composer test-integration
 
 notifications:
     on_success: never
