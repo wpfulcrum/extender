@@ -41,4 +41,6 @@ class APITest extends TestCase
         $this->assertSame(trailingslashit(get_home_url()), get_url_relative_to_home_url());
         $this->assertSame(get_home_url(null, 'foo'), get_url_relative_to_home_url('foo'));
     }
+
+//    public function testShould
 }
