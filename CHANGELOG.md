@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+3.1.3
+- Added WP Module tests.
+
 3.1.2
 - Changed to MIT license
 - Added README.md for WP module.
