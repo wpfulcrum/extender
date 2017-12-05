@@ -6,6 +6,7 @@ The Fulcrum Extender module - extending the PHP functionality for arrays and str
 
 1. Array Module - making it easier to work with PHP arrays, especially deeply nested array.  It includes "dot" notation.
 2. String Module - providing the missing PHP string functionality
+3. WP MOdule - providing some missing WordPress functionality
 
 ## Array Module
 
@@ -42,3 +43,7 @@ Check the documentation for the available array functions including: `array_add`
 ## String Module
 
 We often need functionality to test if a string has, starts with, or ends with a character or substring.  This module includes functionality for checking, converting, and truncating strings.
+
+## WordPress Module
+
+Often times, we need extra functionality to make our jobs easier.  This module adds functionality such as `is_post_page()`, `is_root_web_page()`, `get_url_relative_to_home_url()`, and many more.  Check for the wiki.
