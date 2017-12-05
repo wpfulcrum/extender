@@ -17,8 +17,10 @@ if (empty($wpDevTestsDir)) {
 }
 
 if (!file_exists($wpDevTestsDir . '/includes/functions.php')) {
-    echo "Could not find $wpDevTestsDir/includes/functions.php, have you run bin/install-wp-tests.sh ?";
-    exit(1);
+    trigger_error(
+        "Could not find {$wpDevTestsDir}/includes/functions.php, have you run bin/install-wp-tests.sh?",
+        E_USER_ERROR
+    );
 }
 
 // Relative path to Core tests directory.
@@ -27,7 +29,7 @@ if (!file_exists($wpDevTestsDir . '/includes/')) {
 }
 
 if (!file_exists($wpDevTestsDir . '/includes/')) {
-    trigger_error('Unable to locate wordpress-tests-lib', E_USER_ERROR); // @codingStandardsIgnoreLine.
+    trigger_error('Unable to locate wordpress-tests-lib', E_USER_ERROR);
 }
 
 require_once $wpDevTestsDir . '/includes/bootstrap.php';
