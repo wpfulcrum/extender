@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo "## Installing PHPUnit"
 mkdir -p $HOME/phpunit-bin
 
 if [[ ${TRAVIS_PHP_VERSION:0:2} == "7." ]]; then

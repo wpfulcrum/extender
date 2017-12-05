@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "## Installing WordPress"
+
 if [ $# -lt 3 ]; then
 	echo "usage: $0 <db-name> <db-user> <db-pass> [db-host] [wp-version] [skip-database-creation]"
 	exit 1
