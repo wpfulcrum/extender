@@ -1,6 +1,6 @@
 # Extender Module
 
-[![Latest Stable Version](https://poser.pugx.org/wpfulcrum/extender/v/stable)](https://packagist.org/packages/wpfulcrum/extender) [![License](https://poser.pugx.org/wpfulcrum/extender/license)](https://packagist.org/packages/wpfulcrum/extender)
+[![Build Status](https://travis-ci.org/wpfulcrum/extender.svg?branch=develop)](https://travis-ci.org/wpfulcrum/extender) [![Latest Stable Version](https://poser.pugx.org/wpfulcrum/extender/v/stable)](https://packagist.org/packages/wpfulcrum/extender) [![License](https://poser.pugx.org/wpfulcrum/extender/license)](https://packagist.org/packages/wpfulcrum/extender)
 
 The Fulcrum Extender module - extending the PHP functionality for arrays and strings.
 
