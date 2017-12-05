@@ -1,5 +1,13 @@
 CHANGELOG
 =========
+
+3.1.2
+- Changed to MIT license
+- Added README.md for WP module.
+
+3.1.1
+- Added TravisCI
+
 3.1.0
 - Added WP Extenders
 - Added integration tests.
