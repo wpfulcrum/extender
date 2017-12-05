@@ -4,7 +4,7 @@ namespace Fulcrum\Extender\Tests\Integration;
 
 use Fulcrum\Extender\WP\FrontPageDisplays;
 
-class FrontPageDisplaysTest extends TestCase
+class FrontPageDisplaysTest extends IntegrationTestCase
 {
     public static function tearDownAfterClass()
     {

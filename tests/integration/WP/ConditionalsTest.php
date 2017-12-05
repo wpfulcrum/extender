@@ -5,7 +5,7 @@ namespace Fulcrum\Extender\Tests\Integration;
 use Fulcrum\Extender\WP\Conditionals;
 use Fulcrum\Extender\WP\FrontPageDisplays;
 
-class ConditionalsTest extends TestCase
+class ConditionalsTest extends IntegrationTestCase
 {
     public function testShouldReturnFalseWhenNotPostsPage()
     {

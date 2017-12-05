@@ -4,7 +4,7 @@ namespace Fulcrum\Extender\Tests\Integration;
 
 use Fulcrum\Extender\WP\ParentChild;
 
-class ParentChildTest extends TestCase
+class ParentChildTest extends IntegrationTestCase
 {
     public function testShouldReturnFalseWhenNotAChildPost()
     {
