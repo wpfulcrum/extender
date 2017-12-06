@@ -1,8 +1,52 @@
 <?php
+/**
+ * WordPress Helper functions - extra functions to make your job easier.
+ *
+ * @package     Fulcrum\Extender\WP
+ * @since       3.1.0
+ * @author      hellofromTonya
+ * @link        https://github.com/wpfulcrum/extender
+ * @license     MIT
+ */
 
-use Fulcrum\Extender\WP\Conditionals;
-use Fulcrum\Extender\WP\Database;
-use Fulcrum\Extender\WP\ParentChild;
+if (!function_exists('get_all_supports_for_post_type')) {
+    /**
+     * Get all of the supports for the given post type.
+     *
+     * @since 3.0.0
+     *
+     * @param string $postType Post type for which to fetch its supported featured.
+     *
+     * @return array
+     */
+    function get_all_supports_for_post_type($postType)
+    {
+        $enabledPostTypes = get_all_post_type_supports($postType);
+        if (is_array($enabledPostTypes) && !empty($enabledPostTypes)) {
+            return array_keys($enabledPostTypes);
+        }
+
+        return [];
+    }
+}
+
+if (!function_exists('get_all_custom_post_types')) {
+    /**
+     * Gets all custom post types.
+     *
+     * @since 3.0.0
+     *
+     * @return array
+     */
+    function get_all_custom_post_types()
+    {
+        return get_post_types(
+            [
+                '_builtin' => false,
+            ]
+        );
+    }
+}
 
 if (!function_exists('get_current_web_page_id')) {
     /**

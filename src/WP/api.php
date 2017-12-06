@@ -1,13 +1,13 @@
 <?php
 /**
- * WordPress Support API - a collection of functions to help
+ * WordPress Extender API - a collection of functions to help
  * you get your work done faster with less code (and frustrations).
  *
  * @package     Fulcrum\Extender\WP
  * @since       3.1.0
  * @author      hellofromTonya
  * @link        https://github.com/wpfulcrum/extender
- * @license    MIT
+ * @license     MIT
  */
 
 use Fulcrum\Extender\WP\Conditionals;
