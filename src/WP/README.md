@@ -38,6 +38,10 @@ Each of these functions is documented in the [Wiki](https://github.com/wpfulcrum
 
 ### Helper Functions
 
+[`get_all_custom_post_types`](https://github.com/wpfulcrum/extender/wiki/get_all_custom_post_types)
+
+[`get_all_supports_for_post_type`](https://github.com/wpfulcrum/extender/wiki/get_all_supports_for_post_type)
+
 [`get_current_web_page_id`](https://github.com/wpfulcrum/extender/wiki/get_current_web_page_id)
 
 [`get_post_id`](https://github.com/wpfulcrum/extender/wiki/get_post_id)

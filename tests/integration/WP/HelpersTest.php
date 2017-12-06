@@ -4,6 +4,41 @@ namespace Fulcrum\Extender\Tests\Integration;
 
 class HelpersTest extends IntegrationTestCase
 {
+    public function testShouldReturnNullWhenNoPostTypeSupports()
+    {
+        $this->assertEmpty(get_all_supports_for_post_type('foo'));
+    }
+
+    public function testShouldReturnPostTypeSupports()
+    {
+        register_post_type('foo');
+        $this->assertEquals(['title', 'editor'], get_all_supports_for_post_type('foo'));
+        unregister_post_type('foo');
+    }
+
+    public function testShouldReturnNoCustomPostTypes()
+    {
+        $this->assertEmpty(get_all_custom_post_types());
+    }
+
+    public function testShouldReturnAllCustomPostTypes()
+    {
+        $cpts = [
+            'foo' => 'foo',
+            'bar' => 'bar',
+            'baz' => 'baz',
+        ];
+        foreach($cpts as $postName) {
+            register_post_type($postName);
+        }
+
+        $this->assertEquals($cpts, get_all_custom_post_types());
+
+        foreach($cpts as $postName) {
+            unregister_post_type($postName);
+        }
+    }
+
     public function testShouldReturnCurrentWebPageId()
     {
         $this->go_to('/');

@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+3.1.5
+- Added post type helpers.
+
 3.1.4
 - Added additional WP helpers.
 
