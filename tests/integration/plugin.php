@@ -19,4 +19,7 @@
  * Requires PHP:    5.4
  */
 
+namespace Fulcrum\Extender;
+
 require_once FULCRUM_EXTENDER_ROOT_DIR . 'vendor/autoload.php';
+autoloadWPFiles();

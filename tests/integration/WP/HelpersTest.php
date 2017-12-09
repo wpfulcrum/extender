@@ -28,13 +28,13 @@ class HelpersTest extends IntegrationTestCase
             'bar' => 'bar',
             'baz' => 'baz',
         ];
-        foreach($cpts as $postName) {
+        foreach ($cpts as $postName) {
             register_post_type($postName);
         }
 
         $this->assertEquals($cpts, get_all_custom_post_types());
 
-        foreach($cpts as $postName) {
+        foreach ($cpts as $postName) {
             unregister_post_type($postName);
         }
     }
@@ -58,6 +58,123 @@ class HelpersTest extends IntegrationTestCase
         $this->assertEquals($postId, get_current_web_page_id());
     }
 
+    public function testShouldGetJoinedListOfTerms()
+    {
+        // Setup.
+        register_post_type('extender_cpt');
+        register_taxonomy('extender_tax', ['post', 'extender_cpt']);
+        register_taxonomy('extender_footax', ['extender_cpt']);
+        $bar    = $this->factory->term->create(['name' => 'Bar', 'taxonomy' => 'extender_tax']);
+        $baz    = $this->factory->term->create(['name' => 'Baz', 'taxonomy' => 'extender_tax']);
+        $foobar = $this->factory->term->create(['name' => 'Foobar', 'taxonomy' => 'extender_footax']);
+        $postId = self::factory()->post->create(['post_type' => 'extender_cpt']);
+        wp_set_post_terms($postId, [$bar, $baz], 'extender_tax');
+        wp_set_post_terms($postId, [$foobar], 'extender_footax');
+
+        // Let's test.
+        $this->assertSame('Bar, Baz', get_joined_list_of_terms('extender_tax', $postId));
+        $this->assertSame('Foobar', get_joined_list_of_terms('extender_footax', $postId));
+
+        // Clean up.
+        unregister_post_type('extender_cpt');
+        unregister_taxonomy('extender_tax');
+        unregister_taxonomy('extender_footax');
+    }
+
+    public function testShouldLimitTermsToPostTypeWhenNoArgsGiven()
+    {
+        // Setup.
+        register_post_type('extender_cpt');
+        register_taxonomy('extender_tax', ['post', 'extender_cpt']);
+        register_taxonomy('extender_footax', ['extender_cpt']);
+        $bar    = $this->factory->term->create(['name' => 'Bar', 'taxonomy' => 'extender_tax']);
+        $baz    = $this->factory->term->create(['name' => 'Baz', 'taxonomy' => 'extender_tax']);
+        $foobar = $this->factory->term->create(['name' => 'Foobar', 'taxonomy' => 'extender_footax']);
+        $postId = self::factory()->post->create(['post_type' => 'extender_cpt']);
+        wp_set_post_terms(self::$testPostId, [$bar], 'extender_tax');
+        wp_set_post_terms($postId, [$baz], 'extender_tax');
+        wp_set_post_terms($postId, [$foobar], 'extender_footax');
+
+        // Let's test.
+        $terms   = get_terms_by_post_type(['extender_cpt']);
+        $termIds = wp_list_pluck($terms, 'term_id');
+        $this->assertNotContains($bar, $termIds);
+        $this->assertContains($baz, $termIds);
+        $this->assertContains($foobar, $termIds);
+
+        $terms   = get_terms_by_post_type('post');
+        $termIds = wp_list_pluck($terms, 'term_id');
+        $this->assertContains($bar, $termIds);
+        $this->assertNotContains($baz, $termIds);
+        $this->assertNotContains($foobar, $termIds);
+
+        $terms   = get_terms_by_post_type(['post', 'extender_cpt']);
+        $termIds = wp_list_pluck($terms, 'term_id');
+        $this->assertContains($bar, $termIds);
+        $this->assertContains($baz, $termIds);
+        $this->assertContains($foobar, $termIds);
+
+        // Clean up.
+        unregister_post_type('extender_cpt');
+        unregister_taxonomy('extender_tax');
+        unregister_taxonomy('extender_footax');
+    }
+
+    public function testGetTermsByPostTypeShouldOverrideArgs()
+    {
+        // Setup.
+        register_post_type('extender_cpt');
+        register_taxonomy('extender_tax', ['post', 'extender_cpt']);
+        register_taxonomy('extender_footax', ['extender_cpt']);
+        $bar    = $this->factory->term->create(['name' => 'Bar', 'taxonomy' => 'extender_tax']);
+        $baz    = $this->factory->term->create(['name' => 'Baz', 'taxonomy' => 'extender_tax']);
+        $foobar = $this->factory->term->create(['name' => 'Foobar', 'taxonomy' => 'extender_footax']);
+        $postId = self::factory()->post->create(['post_type' => 'extender_cpt']);
+        wp_set_post_terms(self::$testPostId, [$bar], 'extender_tax');
+        wp_set_post_terms($postId, [$baz], 'extender_tax');
+        wp_set_post_terms($postId, [$foobar], 'extender_footax');
+
+        // Let's test.
+        $termIds = get_terms_by_post_type(
+            ['extender_cpt'],
+            [
+                'hide_empty' => false,
+                'fields'     => 'ids',
+            ]
+        );
+        $this->assertNotContains($bar, $termIds);
+        $this->assertContains($baz, $termIds);
+        $this->assertContains($foobar, $termIds);
+
+        $termIds = get_terms_by_post_type(
+            'post',
+            [
+                'post_type'  => 'post',
+                'hide_empty' => false,
+                'fields'     => 'ids',
+            ]
+        );
+        $this->assertContains($bar, $termIds);
+        $this->assertNotContains($baz, $termIds);
+        $this->assertNotContains($foobar, $termIds);
+
+        $termIds = get_terms_by_post_type(
+            ['post', 'extender_cpt'],
+            [
+                'hide_empty' => false,
+                'fields'     => 'ids',
+            ]
+        );
+        $this->assertContains($bar, $termIds);
+        $this->assertContains($baz, $termIds);
+        $this->assertContains($foobar, $termIds);
+
+        // Clean up.
+        unregister_post_type('extender_cpt');
+        unregister_taxonomy('extender_tax');
+        unregister_taxonomy('extender_footax');
+    }
+
     public function testShouldReturnPathRelativeToHomeUrl()
     {
         $this->assertSame(trailingslashit(get_home_url()), get_url_relative_to_home_url());
@@ -73,20 +190,21 @@ class HelpersTest extends IntegrationTestCase
 
     public function testShouldReturnPostIdWhenInAdminButNotFound()
     {
-        // This will make sure that WP_Query sets is_admin to true.
-        set_current_screen( 'edit.php' );
+        // Setup.
+        set_current_screen('edit.php');
 
         $this->assertEquals(0, get_post_id_when_in_backend());
         $this->assertEquals(14, get_post_id_when_in_backend(14));
         $this->assertEquals('not an integer', get_post_id_when_in_backend('not an integer'));
 
-        set_current_screen( 'front' );
+        // Clean up.
+        set_current_screen('front');
     }
 
     public function testShouldGetPostIdWhenInBackend()
     {
-        // This will make sure that WP_Query sets is_admin to true.
-        set_current_screen( 'edit.php' );
+        // Setup.
+        set_current_screen('edit.php');
 
         $_REQUEST['post_ID'] = 10;
         $this->assertEquals(10, get_post_id_when_in_backend());
@@ -108,7 +226,8 @@ class HelpersTest extends IntegrationTestCase
         unset($_REQUEST['post']);
         $this->assertEquals(0, get_post_id_when_in_backend());
 
-        set_current_screen( 'front' );
+        // Clean up.
+        set_current_screen('front');
     }
 
     public function testShouldReturnGetTheIdWhenLessZero()
@@ -121,18 +240,17 @@ class HelpersTest extends IntegrationTestCase
         $this->assertEquals(self::$testPostId, get_post_id('not an integer'));
     }
 
-
-
     public function testShouldReturnPostIdWhenInBackend()
     {
-        // This will make sure that WP_Query sets is_admin to true.
-        set_current_screen( 'edit.php' );
+        // Setup.
+        set_current_screen('edit.php');
 
         $_REQUEST['post_ID'] = 10;
         $this->assertEquals(10, get_post_id());
         unset($_REQUEST['post_ID']);
         $this->assertEquals(0, get_post_id());
 
-        set_current_screen( 'front' );
+        // Clean up.
+        set_current_screen('front');
     }
 }

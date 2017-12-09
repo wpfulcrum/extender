@@ -18,7 +18,6 @@ use Fulcrum\Extender\WP\ParentChild;
  * Conditional Functions
  ***************************/
 
-
 if (!function_exists('is_posts_page')) {
     /**
      * Checks if the current web page request is for the Posts Page, i.e
@@ -106,6 +105,24 @@ if (!function_exists('do_hard_get_option')) {
     function do_hard_get_option($optionName, $defaultValue = 0)
     {
         return Database::doHardGetOption($optionName, $defaultValue);
+    }
+}
+
+if (!function_exists('prepare_array_for_sql_where_in')) {
+    /**
+     * Prepare the raw values in the given array. Then join them in a string.
+     *
+     * The return string can then be inserted into a SQL WHERE IN ( {$prepared} ).
+     *
+     * @since 3.1.6
+     *
+     * @param array $rawData Raw array values to prepare.
+     *
+     * @return string
+     */
+    function prepare_array_for_sql_where_in(array $rawData)
+    {
+        return "'" . implode("', '", array_map('esc_sql', $rawData)) . "'";
     }
 }
 

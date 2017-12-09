@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+3.1.6
+
+- Added `array_flatten`
+- Added `array_flatten_into_delimited_list`
+- Added `get_joined_list_of_terms`
+- Added `get_terms_by_post_type`
+
 3.1.5
 - Added post type helpers.
 

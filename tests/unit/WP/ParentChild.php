@@ -7,6 +7,13 @@ use Fulcrum\Extender\WP\ParentChild;
 
 class ParentChildTest extends TestCase
 {
+    protected function setUp()
+    {
+        parent::setUp();
+
+        require_once FULCRUM_EXTENDER_ROOT_DIR . 'src/WP/api.php';
+    }
+
     public function testShouldReturnNullWhenAttemptinExtractWithNoID()
     {
         $stub = (object) [

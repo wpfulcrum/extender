@@ -62,6 +62,113 @@ if (!function_exists('get_current_web_page_id')) {
     }
 }
 
+if (!function_exists('get_joined_list_of_terms')) {
+    /**
+     * Get a joined list of all the terms for the requested
+     * post ID and term name
+     *
+     * @since 3.1.6
+     *
+     * @param string $taxonomy Name of the taxonomy
+     * @param integer $postId
+     *
+     * @return string Returns the list of terms or ''.
+     */
+    function get_joined_list_of_terms($taxonomy, $postId)
+    {
+        if (!$taxonomy || $postId < 1) {
+            return '';
+        }
+
+        $terms = get_the_terms((int) $postId, $taxonomy);
+        if ($terms && !is_wp_error($terms)) {
+            $termsArr = [];
+            foreach ($terms as $term) {
+                $termsArr[] = $term->name;
+            }
+
+            return join(', ', $termsArr);
+        }
+
+        return '';
+    }
+}
+
+if (!function_exists('get_terms_by_post_type')) {
+    /**
+     * Get all of the terms for the given post type(s) to extend `get_terms()`.
+     *
+     * Note: By default, empty terms are not included.  To include them, add the following to
+     * the `$args` argument:
+     *
+     *      'hide_empty' => false,
+     *
+     * {@see 'WP_Term_Query::__construct()'} for the list of acceptable arguments.
+     *
+     * @since 3.1.6
+     *
+     * @param string|array $postType The post type(s) for which to get the terms.
+     * @param array $args Array of get_terms() arguments. See WP_Term_Query::__construct() for information
+     *                          on accepted arguments. Default empty.
+     *
+     * @return array|int|WP_Error   List of WP_Term instances and their children.
+     *                              Returns WP_Error, if any of $taxonomies do not exist.
+     */
+    function get_terms_by_post_type($postType, array $args = [])
+    {
+        // Add the filter so that we can add our SQL to make this work.
+        add_filter('terms_clauses', 'add_post_type_to_terms_sql', 99999, 3);
+
+        // Override these args.
+        $args['post_type']  = (array)$postType;
+        $args['hide_empty'] = true;
+
+        $terms = get_terms($args);
+
+        // Now remove the filter to restore the default behavior.
+        remove_filter('terms_clauses', 'add_post_type_to_terms_sql', 99999);
+
+        return $terms;
+    }
+
+    /**
+     * This callback allows you to add "post_type" as a term query argument to limit the terms to only
+     * those bound to the post type(s) you specify.
+     *
+     * When you get_terms(), you can limit it to one or more post types by adding:
+     *      'post_type' => 'portfolio',
+     * or
+     *      'post_type' => ['portfolio', 'bio'],
+     * as an argument.
+     *
+     * If `post_type` is supplied, this callback adds it to the SQL query; else, nothing happens as it bails out.
+     *
+     * @since 3.1.6
+     *
+     * @param array $clauses Terms query SQL clauses.
+     * @param array $taxonomies An array of taxonomies.
+     * @param array $args An array of terms query arguments.
+     *
+     * @return mixed
+     */
+    function add_post_type_to_terms_sql(array $clauses, array $taxonomies, array $args)
+    {
+        if (!array_key_exists('post_type', $args) || !$args['post_type']) {
+            return $clauses;
+        }
+
+        $postTypes = prepare_array_for_sql_where_in((array) $args['post_type']);
+
+        global $wpdb;
+        $clauses['join']  .=
+            " INNER JOIN {$wpdb->term_relationships} AS tr ON tr.term_taxonomy_id = tt.term_taxonomy_id" .
+            " INNER JOIN {$wpdb->posts} AS p ON p.ID = tr.object_id";
+        $clauses['where'] .= " AND p.post_type IN ( {$postTypes} ) GROUP BY t.term_id";
+
+        return $clauses;
+    }
+}
+
 if (!function_exists('get_url_relative_to_home_url')) {
     /**
      * Get the URL relative to the site's root (home url).
@@ -197,6 +304,7 @@ if (!function_exists('fulcrum_get_plugin_url')) {
         if (!is_ssl()) {
             return $pluginUrl;
         }
+
         return str_replace('http://', 'https://', $pluginUrl);
     }
 }

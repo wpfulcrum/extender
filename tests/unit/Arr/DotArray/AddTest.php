@@ -5,7 +5,7 @@ namespace Fulcrum\Tests\Unit\Extender\Arr\DotArray;
 use PHPUnit\Framework\TestCase;
 use Fulcrum\Extender\Arr\DotArray;
 
-class ZAddTest extends TestCase
+class AddTest extends TestCase
 {
     protected $bob;
     protected $mary;

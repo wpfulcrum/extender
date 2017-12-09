@@ -5,7 +5,7 @@ namespace Fulcrum\Tests\Unit\Extender\Arr\DotArray;
 use PHPUnit\Framework\TestCase;
 use Fulcrum\Extender\Arr\DotArray;
 
-class ZGetExceptTest extends TestCase
+class GetExceptTest extends TestCase
 {
     protected $data;
 

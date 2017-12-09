@@ -7,7 +7,7 @@ use Fulcrum\Extender\Arr\DotArray;
 
 class ZFlattenIntoDotsTest extends TestCase
 {
-    public function testSingleLevel()
+    public function testShouldNotChangeFlatArrays()
     {
         $data = [
             'user_id' => 504,
@@ -18,7 +18,7 @@ class ZFlattenIntoDotsTest extends TestCase
         $this->assertEquals($data, array_flatten_into_dots($data));
     }
 
-    public function test2Levels()
+    public function testShouldDeeplyFlatten()
     {
         $data     = [
             'user_id' => 504,
@@ -53,10 +53,7 @@ class ZFlattenIntoDotsTest extends TestCase
 
         $this->assertEquals($expected, DotArray::flattenIntoDots($data));
         $this->assertEquals($expected, array_flatten_into_dots($data));
-    }
 
-    public function testMultiLevels()
-    {
         $data     = [
             'user_id' => 504,
             'name'    => 'Bob Jones',
@@ -114,7 +111,7 @@ class ZFlattenIntoDotsTest extends TestCase
         $this->assertEquals($expected, array_flatten_into_dots($data));
     }
 
-    public function testPrefix()
+    public function testShouldAddPrefix()
     {
         $data     = [
             'user_id' => 504,
@@ -124,12 +121,12 @@ class ZFlattenIntoDotsTest extends TestCase
             ],
         ];
         $expected = [
-            'wpmaker_user_id'        => 504,
-            'wpmaker_name'           => 'Bob Jones',
-            'wpmaker_social.twitter' => '@bobjones',
+            'fulcrum_user_id'        => 504,
+            'fulcrum_name'           => 'Bob Jones',
+            'fulcrum_social.twitter' => '@bobjones',
         ];
 
-        $this->assertEquals($expected, DotArray::flattenIntoDots($data, 'wpmaker_'));
-        $this->assertEquals($expected, array_flatten_into_dots($data, 'wpmaker_'));
+        $this->assertEquals($expected, DotArray::flattenIntoDots($data, 'fulcrum_'));
+        $this->assertEquals($expected, array_flatten_into_dots($data, 'fulcrum_'));
     }
 }

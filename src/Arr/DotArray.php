@@ -85,6 +85,33 @@ class DotArray
     }
 
     /**
+     * Flatten a multi-dimensional array into a single level.  Keys are not preserved.
+     *
+     * @since 3.1.6
+     *
+     * @param  array $subjectArray The subject array to work on.
+     * @param  int $depth (Optional) The depth to flatten. Default is INF (infinite), meaning all levels.
+     *
+     * @return array
+     */
+    public static function flatten(array $subjectArray, $depth = INF)
+    {
+        $flattenArray = [];
+
+        foreach ($subjectArray as $value) {
+            if (!is_array($value)) {
+                $flattenArray[] = $value;
+            } elseif ($depth === 1) {
+                $flattenArray = array_merge($flattenArray, array_values($value));
+            } else {
+                $flattenArray = array_merge($flattenArray, static::flatten($value, $depth - 1));
+            }
+        }
+
+        return $flattenArray;
+    }
+
+    /**
      * Flatten a multi-dimensional array into a single level with the keys compressed
      * into dot notation to indicate each depth level.
      *
@@ -99,19 +126,19 @@ class DotArray
      */
     public static function flattenIntoDots(array $subjectArray, $keyPrefix = '')
     {
-        $newArray = [];
+        $flattenArray = [];
 
         foreach ($subjectArray as $key => $value) {
             $newKey = $keyPrefix . $key;
 
             if (is_array($value) && !empty($value)) {
-                $newArray = array_merge($newArray, self::flattenIntoDots($value, $newKey . '.'));
+                $flattenArray = array_merge($flattenArray, self::flattenIntoDots($value, $newKey . '.'));
                 continue;
             }
-            $newArray[$newKey] = $value;
+            $flattenArray[$newKey] = $value;
         }
 
-        return $newArray;
+        return $flattenArray;
     }
 
     /**
@@ -256,7 +283,7 @@ class DotArray
     public static function remove(array &$subjectArray, $keys)
     {
         $original =& $subjectArray;
-        foreach ((array)$keys as $key) {
+        foreach ((array) $keys as $key) {
             self::removeSegments($subjectArray, $key);
 
             $subjectArray =& $original;
@@ -287,7 +314,7 @@ class DotArray
             return $subjectArray = $newValue;
         }
 
-        $keys         = (array)self::explodeDotNotationKeys($key);
+        $keys         = (array) self::explodeDotNotationKeys($key);
         $numberOfKeys = count($keys);
 
         foreach ($keys as $key) {

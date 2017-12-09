@@ -34,14 +34,10 @@ if (!file_exists($wpDevTestsDir . '/includes/')) {
 
 require_once $wpDevTestsDir . '/includes/bootstrap.php';
 
-/**
- * Time to load Composer's autoloader.
- */
-$vendorPath = FULCRUM_EXTENDER_ROOT_DIR . 'vendor' . DIRECTORY_SEPARATOR;
-if (!file_exists($vendorPath . 'autoload.php')) {
+// Make sure that Composer is ready.
+if (!file_exists(FULCRUM_EXTENDER_ROOT_DIR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php')) {
     die('Whoops, we need Composer before we start running tests.  Please type: `composer install`.');
 }
-unset($vendorPath, $wpDevTestsDir);
 
 tests_add_filter('plugins_loaded', __NAMESPACE__ . '\manually_load_plugin', 1);
 /**

@@ -3,7 +3,7 @@
  * Array Helpers API
  *
  * @package     Fulcrum\Extender\Arr;
- * @since       3.1.2
+ * @since       3.1.6
  * @author      hellofromTonya
  * @link        https://github.com/wpfulcrum/extender
  * @license     MIT
@@ -50,6 +50,23 @@ if (!function_exists('array_exists')) {
     }
 }
 
+if (!function_exists('array_flatten')) {
+    /**
+     * Flatten a multi-dimensional array into a single level.  Keys are not preserved.
+     *
+     * @since 3.1.6
+     *
+     * @param  array $subjectArray The subject array to work on.
+     * @param  int $depth (Optional) The depth to flatten. Default is INF (infinite), meaning all levels.
+     *
+     * @return array
+     */
+    function array_flatten(array $subjectArray, $depth = INF)
+    {
+        return DotArray::flatten($subjectArray, $depth);
+    }
+}
+
 if (!function_exists('array_flatten_into_dots')) {
     /**
      * Flatten a multi-dimensional array into a single level with the keys compressed
@@ -67,6 +84,23 @@ if (!function_exists('array_flatten_into_dots')) {
     function array_flatten_into_dots(array $subjectArray, $keyPrefix = '')
     {
         return DotArray::flattenIntoDots($subjectArray, $keyPrefix);
+    }
+}
+
+if (!function_exists('array_flatten_into_delimited_list')) {
+    /**
+     * Flatten an array into a delimited list.
+     *
+     * @since 3.1.6
+     *
+     * @param  array $subjectArray The subject array to work on.
+     * @param string $delimiter Delimiter to be used. Default is ',' for a comma-separated list.
+     *
+     * @return string
+     */
+    function array_flatten_into_delimited_list(array $subjectArray, $delimiter = ',')
+    {
+        return implode($delimiter, DotArray::flatten($subjectArray));
     }
 }
 
@@ -240,7 +274,7 @@ if (!function_exists('array_get_only')) {
     {
         return array_intersect_key(
             $subjectArray,
-            array_flip((array)$keys)
+            array_flip((array) $keys)
         );
     }
 }
@@ -420,6 +454,7 @@ if (!function_exists('array_trim')) {
      * @param array $subjectArray Array to work on.
      * @param bool|null $goDeep When true, all strings values at each level of
      *                     array are trimmed.
+     *
      * @return array
      */
     function array_trim(array &$subjectArray, $goDeep = null)

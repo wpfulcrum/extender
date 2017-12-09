@@ -19,6 +19,8 @@ Each of these functions is documented in the [Wiki](https://github.com/wpfulcrum
 [`do_harder_rewrite_rules_flush`](https://github.com/wpfulcrum/extender/wiki/do_harder_rewrite_rules_flush)
     
 [`do_hard_get_option`](https://github.com/wpfulcrum/extender/wiki/do_hard_get_option)
+
+[`prepare_array_for_sql_where_in`](https://github.com/wpfulcrum/extender/wiki/prepare_array_for_sql_where_in)
     
 ### Parent-Child API Functions    
     
@@ -44,9 +46,13 @@ Each of these functions is documented in the [Wiki](https://github.com/wpfulcrum
 
 [`get_current_web_page_id`](https://github.com/wpfulcrum/extender/wiki/get_current_web_page_id)
 
+[`get_joined_list_of_terms`](https://github.com/wpfulcrum/extender/wiki/get_joined_list_of_terms)
+
 [`get_post_id`](https://github.com/wpfulcrum/extender/wiki/get_post_id)
 
 [`get_post_id_when_in_backend`](https://github.com/wpfulcrum/extender/wiki/get_post_id_when_in_backend)
+
+[`get_terms_by_post_type`](https://github.com/wpfulcrum/extender/wiki/get_terms_by_post_type)
      
 [`get_url_relative_to_home_url`](https://github.com/wpfulcrum/extender/wiki/get_url_relative_to_home_url) 
      

@@ -32,7 +32,7 @@ $user = array(
 ```
 What gets returned then is `'@bobjones'`;
   
->Credit: Taylor Otwell brought us dot notation in the [Laravel framework](https://laravel.com/).  Using his concept, Fulcrum adapts it to fit WordPress running on PHP 5.4 and up.
+>Credit: Taylor Otwell brought us dot notation in the [Laravel framework](https://laravel.com/).  Using his concept, Fulcrum adapts it to fit WordPress running on PHP 5.6 and up.
 
 ### API Helpers
 
@@ -43,6 +43,10 @@ Each of these API helpers is documented in the [Wiki](https://github.com/wpfulcr
 [`array_add`](https://github.com/wpfulcrum/extender/wiki/array_add)<sup>*</sup>
 
 [`array_exists`](https://github.com/wpfulcrum/extender/wiki/array_exists)
+
+[`array_flatten`](https://github.com/wpfulcrum/extender/wiki/array_flatten)
+
+[`array_flatten_into_delimited_list`](https://github.com/wpfulcrum/extender/wiki/array_flatten_into_delimited_list)
  
 [`array_flatten_into_dots`](https://github.com/wpfulcrum/extender/wiki/array_flatten_into_dots)<sup>*</sup>
 

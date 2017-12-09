@@ -20,10 +20,9 @@
             "Fulcrum\\Extender\\": "src"
         },
         "files": [
+            "src/module.php",
             "src/Arr/api.php",
-            "src/Str/api.php",
-            "src/WP/api.php",
-            "src/WP/helpers.php"
+            "src/Str/api.php"
         ],
         "exclude-from-classmap": [
             "/tests/"
