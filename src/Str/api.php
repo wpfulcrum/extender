@@ -282,7 +282,7 @@ if (!function_exists('convert_to_lower_case')) {
      */
     function convert_to_lower_case($stringToConvert, $characterEncoding = 'UTF-8')
     {
-        if (!$characterEncoding) {
+        if (empty($characterEncoding)) {
             return strtolower($stringToConvert);
         }
 
@@ -369,7 +369,7 @@ if (!function_exists('convert_to_upper_case')) {
      */
     function convert_to_upper_case($stringToConvert, $characterEncoding = 'UTF-8')
     {
-        if (!$characterEncoding) {
+        if (empty($characterEncoding)) {
             return strtoupper($stringToConvert);
         }
 

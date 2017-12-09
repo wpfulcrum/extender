@@ -22,7 +22,7 @@ if (!function_exists('array_add')) {
      * @since 3.0.0
      *
      * @param array $subjectArray The subject array
-     * @param string|array $newElementKey The new element's key.
+     * @param string $newElementKey The new element's key. Use "dot" notation for nested keys.
      * @param mixed $newElementValue The new element's value
      *
      * @return array If the key does not exist, the new array is returned;

@@ -16,7 +16,7 @@ class ParentChild
     public static function isChildPost($postOrPostId = null)
     {
         $post = self::getPost($postOrPostId);
-        if (!$post) {
+        if (empty($post)) {
             return false;
         }
 
@@ -35,7 +35,7 @@ class ParentChild
     public static function isParentPost($postOrPostId = null)
     {
         $post = self::getPost($postOrPostId);
-        if (!$post) {
+        if (empty($post)) {
             return false;
         }
 

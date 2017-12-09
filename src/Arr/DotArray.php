@@ -49,7 +49,7 @@ class DotArray
      * @since 3.0.0
      *
      * @param array $subjectArray The subject array
-     * @param string|array $newElementKey The new element's key.
+     * @param string $newElementKey The new element's key. Use "dot" notation for nested keys.
      * @param mixed $newElementValue The new element's value
      *
      * @return array If the key does not exist, the new array is returned;
@@ -210,15 +210,15 @@ class DotArray
      *
      * @since 3.0.0
      *
-     * @param array $subjectArray The subject array to be worked on.
-     * @param string|array $targetKeys Key(s) to pluck the values from the subject array.
-     * @param string|null $reKeyed (optional) Specifies how you want the elements to be rekeyed.
+     * @param array $subjectArray The subject array to be worked on
+     * @param string|array $targetKeys Key(s) to pluck the values from the subject array
+     * @param string|null $reKeyed (optional) Specifies how you want the elements to be rekeyed
      *
      * @return array
      */
     public static function pluck(array $subjectArray, $targetKeys, $reKeyed = null)
     {
-        if (!$subjectArray) {
+        if (empty($subjectArray)) {
             return [];
         }
 
@@ -304,7 +304,7 @@ class DotArray
      *
      * @param array|mixed $subjectArray (By reference) The subject array to work on
      * @param string $key The key to find within the array (can be dot notation)
-     * @param mixed $newValue The element's new value.
+     * @param mixed $newValue The element's new value
      *
      * @return array The current nested level is returned
      */

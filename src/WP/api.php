@@ -138,7 +138,7 @@ if (!function_exists('is_child_post')) {
      *
      * @param int|WP_Post|null $postOrPostId Post Instance or Post ID to check
      *
-     * @return boolean
+     * @return bool
      */
     function is_child_post($postOrPostId = null)
     {
@@ -154,7 +154,7 @@ if (!function_exists('is_parent_post')) {
      *
      * @param int|WP_Post|null $postOrPostId Post Instance or Post ID to check
      *
-     * @return boolean
+     * @return bool
      */
     function is_parent_post($postOrPostId = null)
     {
@@ -170,7 +170,7 @@ if (!function_exists('post_has_children')) {
      *
      * @param int|WP_Post|null $postOrPostId Post Instance or Post ID to check
      *
-     * @return boolean
+     * @return bool
      */
     function post_has_children($postOrPostId = null)
     {

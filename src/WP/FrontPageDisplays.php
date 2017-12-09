@@ -60,7 +60,7 @@ class FrontPageDisplays
      *
      * @since 3.1.0
      *
-     * @return void
+     * @return bool
      */
     public static function isSetToYourLatestPosts()
     {
@@ -83,7 +83,7 @@ class FrontPageDisplays
      *
      * @since 3.1.0
      *
-     * @return void
+     * @return bool
      */
     public static function isSetToStaticPostsPage()
     {
@@ -108,7 +108,7 @@ class FrontPageDisplays
      *
      * @since 3.1.0
      *
-     * @return void
+     * @return bool
      */
     public static function isSetToStaticFrontPage()
     {

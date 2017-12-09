@@ -204,7 +204,7 @@ class StrConverters
 
         $stringToConvert = str_replace(['-', '_'], ' ', $stringToConvert);
 
-        if ($characterEncoding) {
+        if (!empty($characterEncoding)) {
             $stringToConvert = mb_convert_case($stringToConvert, MB_CASE_TITLE, $characterEncoding);
         } else {
             $stringToConvert = ucwords($stringToConvert);
@@ -224,11 +224,11 @@ class StrConverters
      */
     protected static function getAsciiReplacements()
     {
-        if (self::$asciiReplaces) {
+        if (!empty(self::$asciiReplaces)) {
             return self::$asciiReplaces;
         }
 
-        self::$asciiReplaces = require_once(__DIR__ . '/config/ascii-replacers.php');
+        self::$asciiReplaces = require_once __DIR__ . '/config/ascii-replacers.php';
 
         if (function_exists('apply_filters')) {
             self::$asciiReplaces = apply_filters(
