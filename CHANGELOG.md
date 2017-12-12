@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+3.1.7
+- Standardized `src` architecture
+- Standardized tests architecture
+- Standardized `phpcs.xml.dist`
+- Standardized `phpunit.xml.dist`
+
 3.1.6
 
 - Added `array_flatten`

@@ -8,7 +8,8 @@
     <exclude-pattern>*/dist/*</exclude-pattern>
     <exclude-pattern>node_modules/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
-    <exclude-pattern>tests/*</exclude-pattern>
+    <exclude-pattern>tests/unit/bootstrap.php</exclude-pattern>
+    <exclude-pattern>tests/integration/bootstrap.php</exclude-pattern>
 
     <!-- PHP only. We'll use other validators for JS, CSS, etc. -->
     <arg name="extensions" value="php"/>

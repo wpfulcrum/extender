@@ -1,13 +1,13 @@
 <?php
 
-namespace Fulcrum\Extender\Tests\Integration;
+namespace Fulcrum\Tests\Integration;
 
 if (version_compare(phpversion(), '5.6.0', '<')) {
     die('Whoops, PHP 5.6 or higher is required.');
 }
 
-define('FULCRUM_EXTENDER_INTEGRATION_TESTS_DIR', __DIR__ . DIRECTORY_SEPARATOR);
-define('FULCRUM_EXTENDER_ROOT_DIR', dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR);
+define('FULCRUM_TESTS_DIR', __DIR__ . DIRECTORY_SEPARATOR);
+define('FULCRUM_ROOT_DIR', dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR);
 
 $wpDevTestsDir = getenv('WP_TESTS_DIR');
 
@@ -34,10 +34,16 @@ if (!file_exists($wpDevTestsDir . '/includes/')) {
 
 require_once $wpDevTestsDir . '/includes/bootstrap.php';
 
-// Make sure that Composer is ready.
-if (!file_exists(FULCRUM_EXTENDER_ROOT_DIR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php')) {
+/**
+ * Time to load Composer's autoloader.
+ */
+$vendorPath = FULCRUM_ROOT_DIR . 'vendor' . DIRECTORY_SEPARATOR;
+if (!file_exists($vendorPath . 'autoload.php')) {
     die('Whoops, we need Composer before we start running tests.  Please type: `composer install`.');
 }
+unset($vendorPath, $wpDevTestsDir);
+
+require_once FULCRUM_TESTS_DIR . 'IntegrationTestCase.php';
 
 tests_add_filter('plugins_loaded', __NAMESPACE__ . '\manually_load_plugin', 1);
 /**
@@ -49,5 +55,5 @@ tests_add_filter('plugins_loaded', __NAMESPACE__ . '\manually_load_plugin', 1);
  */
 function manually_load_plugin()
 {
-    require FULCRUM_EXTENDER_INTEGRATION_TESTS_DIR . 'plugin.php';
+    require FULCRUM_TESTS_DIR . 'plugin.php';
 }

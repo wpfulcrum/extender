@@ -1,6 +1,6 @@
 <?php
 
-namespace Fulcrum\Extender\Tests\Integration;
+namespace Fulcrum\Tests\Integration;
 
 use WP_UnitTestCase;
 
