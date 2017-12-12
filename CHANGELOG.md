@@ -1,6 +1,9 @@
 CHANGELOG
 =========
 
+3.1.8
+- Fixed autoloading WP files when not running unit tests.
+
 3.1.7
 - Standardized `src` architecture
 - Standardized tests architecture

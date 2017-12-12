@@ -2,7 +2,7 @@
 
 namespace Fulcrum\Extender;
 
-if (defined('ABSPATH')) {
+if (!defined('FULCRUM_UNIT_TESTS_RUNNING')) {
     autoloadWPFiles();
 }
 
