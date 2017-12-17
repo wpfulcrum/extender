@@ -27,8 +27,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Fulcrum\\Tests\\Integration\\": "tests/integration/",
-            "Fulcrum\\Tests\\Unit\\": "tests/unit/"
+            "Fulcrum\\Tests\\Integration\\": "tests/Integration",
+            "Fulcrum\\Tests\\Unit\\": "tests/Unit/"
         }
     },
     "require": {
